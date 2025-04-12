@@ -4,7 +4,7 @@
     --secondary-color: #BDDDE4;
     --accent-color: #5D8BF4;
     --text-color: #2C3E50;
-    --light-color: #FFFFFF;
+    --light-color: #ffffff;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -56,7 +56,7 @@ body {
 }
 /* Navigation - Enhanced */
 .navbar {
-    background: rgba(255, 255, 255, 0.98);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     padding: 1.5rem 2rem;
     position: sticky;
     top: 0;
@@ -149,7 +149,20 @@ body {
     color: var(--light-color);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: url('../images/bg1.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
 }
 
 .hero-content {
@@ -276,8 +289,16 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 12px rgba(0,0,0,0.15);
+    z-index: 10;
 }
 
 .product-image {
