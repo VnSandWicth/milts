@@ -1,276 +1,780 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Milts Decoration</title>
-    <link rel="icon" href="https://thundercloudid.my.canva.site/milts-decoration/images/d91b139a448b857da608300f163c6cb9.png" type="image/png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/mobile-fix.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Add Swiper JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-   <style>
-        .swiper {
-            width: 100%;
-            padding: 20px 0;
-        }
-        .swiper-slide {
-            width: auto;
-        }
-        .swiper-button-prev, .swiper-button-next {
-            color: #fff;
-            background: rgba(0,0,0,0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .swiper-button-prev::after, .swiper-button-next::after {
-            font-size: 20px;
-        }
-        @media (max-width: 768px) {
-            .swiper-slide {
-                width: 80%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="https://thundercloudid.my.canva.site/milts-decoration/images/d91b139a448b857da608300f163c6cb9.png" id="logo">
-                Milts Decoration
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Beranda</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
-                <li><a href="#services">Layanan</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-           
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-    </header>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Milts Decoration</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* ==========================================================================
+   MILTS DECORATION — landing page
+   Daftar isi CSS:
+   1. Token & reset          6. Studio panggung 3D
+   2. Header & tombol        7. Galeri (foto + contoh SVG)
+   3. Hero (siang/malam)     8. Review
+   4. Marquee                9. Cara pesan & footer
+   5. Layanan               10. Panel kelola galeri (khusus pemilik) & lightbox
+   ========================================================================== */
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1><b>Mau Buat Dekorasi Acara yang Memukau<br>Dengan Budget yang Sesuai?</b></h1>
-            <p><mark> di Milts Decoration Aja !</mark></p>
+/* 1. TOKEN & RESET ------------------------------------------------------- */
+:root{
+  --paper:#f3ede1; --ink:#101a3a; --navy:#101a3a;
+  --sun:#ffc533; --coral:#ff5b3a; --sky:#3a5bff; --mut:#5d6580;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--paper:#0c1330;--ink:#f3ede1;--mut:#9aa3c4;color-scheme:dark}
+}
+:root[data-theme="dark"]{--paper:#0c1330;--ink:#f3ede1;--mut:#9aa3c4;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.035em;line-height:.95;margin:0}
+h2{font-size:clamp(2.3rem,6vw,4.6rem);margin-bottom:30px}
+a{color:inherit}
+section{padding:90px 0}
+.w{max-width:1160px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+/* Muncul halus saat di-scroll */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+
+/* 2. HEADER & TOMBOL ----------------------------------------------------- */
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 22px}
+.lg{font:800 1.25rem var(--display);background:var(--sun);color:var(--navy);padding:5px 12px;border-radius:99px;text-decoration:none;transform:rotate(-3deg)}
+.cta{background:var(--sun);color:var(--navy);text-decoration:none;padding:10px 20px;border-radius:99px;font-weight:500;font-size:.9rem}
+.btn{display:inline-block;background:var(--coral);color:#fff;padding:15px 28px;border-radius:99px;text-decoration:none;font-weight:700;margin:0 10px 10px 0;position:relative;z-index:2;transition:transform .2s}
+.btn:hover{transform:translateY(-3px) rotate(-1deg)}
+.btn.o{background:none;color:var(--ink);border:2px solid var(--ink)}
+
+/* 3. HERO ---------------------------------------------------------------- */
+.hero{
+  min-height:100svh;display:grid;align-items:start;padding:110px 0 60px;position:relative;overflow:hidden;
+  background:linear-gradient(#f7f0e0,#ffd9a0);color:#101a3a;transition:color 1.2s;
+  --line:#101a3a;--b:#fffaf0;--b2:#efe6d2;--win:#fbe7a8;--gr:#e9dfc7;--arch:#ff5b3a;
+}
+.hero.n{color:#f3ede1;--line:#c3cfff;--b:#141d45;--b2:#0e1636;--win:#ffc533;--gr:#0a1030;--arch:#b8344c}
+.hero h1{font-size:clamp(3.2rem,11vw,9rem);position:relative;z-index:2}
+.hero h1 span{color:var(--coral)}
+.hero p{max-width:34ch;font-size:1.15rem;color:inherit;opacity:.78;position:relative;z-index:2;margin:26px 0}
+.hero .btn.o{color:inherit;border-color:currentColor}
+.hero .btn.o:hover{background:#ffffff22}
+.sky{position:absolute;inset:0;background:linear-gradient(#070c26,#1d2a5e 70%,#34397a);opacity:0;transition:opacity 1.4s}
+.hero.n .sky{opacity:1}
+.tgl{position:absolute;right:18px;bottom:18px;z-index:5;border:0;border-radius:99px;padding:10px 18px;background:var(--sun);color:var(--navy);font:700 .9rem var(--body);cursor:pointer}
+
+/* Adegan kota (SVG dibuat oleh JS) */
+.sc{position:absolute;left:0;right:0;bottom:0;width:100%;height:clamp(320px,56svh,600px);z-index:1}
+.sc *{stroke:var(--line);stroke-width:1.6;fill:none;transition:fill 1.2s,stroke 1.2s,opacity 1.2s,filter 1.2s}
+.sc .f{fill:var(--b)} .sc .f2{fill:var(--b2)} .sc .win{fill:var(--win);stroke-width:1} .sc .a{fill:var(--arch)}
+.sc .tx{fill:#ffc533;stroke:none;font:800 44px var(--display)}
+.sc .mn{fill:#f3ede1;stroke:none}
+.sc .nt{opacity:0} .hero.n .nt{opacity:1} .hero.n .dy{opacity:0}
+.hero.n .win{filter:drop-shadow(0 0 6px #ffc533)}
+.hero.n .a{filter:drop-shadow(0 0 16px #ff9d85)}
+.sc .bm{fill:#fff;stroke:none;opacity:0;animation:sw 6s ease-in-out infinite alternate}
+.hero.n .bm{opacity:.13}
+.sc .tw{fill:#fff;stroke:none;animation:tw 3s ease-in-out infinite}
+.sc .bl{fill:#ffc533;stroke:none;animation:tw 2.4s ease-in-out infinite}
+.ly{transition:transform .25s ease-out}
+.cl{animation:cl 70s linear infinite}
+.sw1{animation:sy 3.4s ease-in-out infinite alternate}
+.fg{animation:fg 1.6s ease-in-out infinite alternate}
+.pp1{animation:wk 40s linear infinite}
+.pp2{animation:wk2 52s linear infinite}
+.bob{animation:bb .55s ease-in-out infinite alternate}
+@keyframes sw{to{transform:skewX(14deg)}}
+@keyframes tw{50%{opacity:.25}}
+@keyframes cl{from{transform:translateX(-300px)}to{transform:translateX(1700px)}}
+@keyframes sy{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+@keyframes fg{to{transform:skewY(10deg)}}
+@keyframes wk{from{transform:translateX(-80px)}to{transform:translateX(1680px)}}
+@keyframes wk2{from{transform:translateX(1680px)}to{transform:translateX(-80px)}}
+@keyframes bb{to{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.sc *,.mq div{animation:none!important}}
+
+/* 4. MARQUEE ------------------------------------------------------------- */
+.mq{background:var(--navy);color:var(--sun);overflow:hidden;white-space:nowrap;padding:16px 0;transform:rotate(-1.2deg);margin:-10px -20px 40px}
+.mq div{display:inline-block;animation:m 28s linear infinite;font:800 1.7rem var(--display)}
+@keyframes m{to{transform:translateX(-50%)}}
+
+/* 5. LAYANAN ------------------------------------------------------------- */
+.sv a{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 16px;border-top:2px solid var(--ink);text-decoration:none;transition:.3s;cursor:pointer}
+.sv a:last-child{border-bottom:2px solid var(--ink)}
+.sv b{font:800 clamp(1.8rem,5vw,3.4rem) var(--display);letter-spacing:-.03em}
+.sv span{color:var(--mut);max-width:30ch;text-align:right;font-size:.95rem}
+.sv a:hover{background:var(--c);color:var(--navy);padding-left:34px}
+.sv a:hover span{color:var(--navy)}
+
+/* 6. STUDIO PANGGUNG 3D -------------------------------------------------- */
+.lab{background:var(--sun);color:var(--navy);border-radius:36px;padding:44px 28px;margin:0 10px}
+.lab .mut{color:#3b3a2c;margin:0}
+.lab h2{margin-bottom:10px}
+.ui{display:grid;grid-template-columns:320px 1fr;gap:30px;margin-top:30px}
+@media(max-width:860px){.ui{grid-template-columns:1fr}}
+.ctl{background:var(--navy);color:#f3ede1;border-radius:22px;padding:22px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;font-size:.85rem;margin-top:14px}
+.ctl input[type=range]{width:100%;accent-color:var(--sun)}
+.ctl input[type=text]{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:0;font:inherit;background:#1d2a5a;color:#fff}
+.sw{display:flex;gap:8px;margin-top:8px}
+.sw i{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent}
+.sw i.on{border-color:#fff}
+.tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tg button{font:inherit;font-size:.82rem;background:#1d2a5a;color:#f3ede1;border:0;border-radius:99px;padding:6px 13px;cursor:pointer}
+.tg button.on{background:var(--sun);color:var(--navy);font-weight:700}
+.vw{height:480px;background:radial-gradient(circle at 50% 30%,#fff8,#0000 70%),#e4b928;border-radius:22px;perspective:1100px;position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}
+.vw:active{cursor:grabbing}
+.hint{position:absolute;left:14px;bottom:10px;font-size:.78rem;color:#4a4020;z-index:3}
+.wd{position:absolute;left:50%;top:62%;transform-style:preserve-3d}
+.wd>*{position:absolute;transform-style:preserve-3d}
+#fl{background:repeating-linear-gradient(90deg,#0002 0 2px,#0000 2px 40px),#2a1f3a;opacity:.92}
+#bk{display:flex;align-items:center;justify-content:center;text-align:center;font:800 1.5rem var(--display);color:#fff;overflow:hidden;box-shadow:inset 0 0 60px #0006;transition:width .3s,height .3s,background .3s,border-radius .3s}
+#pp{background:#0b0f20;border-radius:20px 20px 0 0;width:26px}
+#pp:before{content:"";position:absolute;top:-22px;left:2px;width:22px;height:22px;border-radius:50%;background:#0b0f20}
+.sm{margin-top:16px;font:700 1.2rem var(--display)}
+.sm a{display:inline-block;margin-top:10px;background:var(--navy);color:#fff;padding:12px 22px;border-radius:99px;text-decoration:none;font:500 .9rem var(--body)}
+
+/* 7. GALERI -------------------------------------------------------------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;background:none;color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer}
+.chips button.on{background:var(--ink);color:var(--paper)}
+.gnote{color:var(--mut);font-size:.95rem;margin:18px 0 0}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:20px}
+.cd{border-radius:26px;padding:18px;aspect-ratio:4/5;max-width:100%;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s;color:var(--navy);position:relative;overflow:hidden}
+.cd svg{width:100%;flex:1;min-height:0}
+.cd b{font:800 1.4rem var(--display);letter-spacing:-.02em}
+.cd small{opacity:.7}
+/* kartu foto asli */
+.cd.ph{margin:0;padding:0;background:#000;color:#fff}
+.cd.ph .open{position:absolute;inset:0;border:0;padding:0;background:none;cursor:zoom-in}
+.cd.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.cd.ph:hover img{transform:scale(1.04)}
+.cd.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 14px;background:linear-gradient(#0000,#000b);text-align:left;pointer-events:none}
+.cd.ph .cap b{display:block;font-size:1.15rem;line-height:1.15}
+.cd.ph .cap small{opacity:.8}
+.cd.ph .del{position:absolute;top:10px;right:10px;z-index:2;border:0;border-radius:99px;padding:7px 14px;background:#000a;color:#fff;font:700 .8rem var(--body);cursor:pointer}
+.cd.ph .del.sure{background:var(--coral)}
+
+/* 8. REVIEW -------------------------------------------------------------- */
+.rw{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.rc{margin:0;background:var(--ink);color:var(--paper);border-radius:22px;padding:22px;min-width:0}
+.rc .st{color:var(--sun);letter-spacing:.1em}
+.rc blockquote{margin:10px 0 14px;font-size:1rem}
+.rc figcaption{font-size:.85rem;opacity:.75}
+
+/* 9. CARA PESAN & FOOTER ------------------------------------------------- */
+.fl{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:800px){.fl{grid-template-columns:1fr 1fr}}
+.fl div{background:var(--ink);color:var(--paper);border-radius:22px;padding:22px 18px;min-height:170px;transition:.3s}
+.fl div:hover{background:var(--coral);color:#fff;transform:translateY(-8px) rotate(-1.5deg)}
+.fl i{font:800 2.6rem var(--display);font-style:normal;opacity:.5}
+.fl b{display:block;font:800 1.3rem var(--display)}
+.fl p{margin:6px 0 0;font-size:.9rem;opacity:.8}
+.ft{background:var(--navy);color:#f3ede1;padding:70px 0 30px;border-radius:40px 40px 0 0;margin-top:60px}
+.ft h2{font-size:clamp(3rem,13vw,11rem);color:var(--sun);margin:30px 0 10px}
+.ft .r{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.9rem;opacity:.85}
+
+/* 10. PANEL KELOLA GALERI (pemilik) & LIGHTBOX --------------------------- */
+.own{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;border:0;border-radius:99px;padding:12px 20px;background:var(--navy);color:var(--sun);font:700 .9rem var(--body);cursor:pointer;box-shadow:0 6px 24px #0006}
+.up{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:31;max-width:560px;margin-left:auto;background:var(--navy);color:#fff;padding:16px;border-radius:20px;display:grid;gap:10px;box-shadow:0 10px 40px #000a}
+.up .hd{display:flex;justify-content:space-between;align-items:center}
+.up .hd button{background:none;border:0;color:#fff;font-size:1.2rem;cursor:pointer}
+.up input,.up select{font:inherit;padding:10px;border-radius:10px;border:0;width:100%;background:#1d2a5a;color:#fff;min-width:0}
+.up .go{background:var(--sun);color:var(--navy);border:0;border-radius:99px;padding:11px 18px;font:700 .95rem var(--body);cursor:pointer}
+.up .go:disabled{opacity:.5;cursor:default}
+.up .msg{font-size:.88rem;min-height:1.3em;opacity:.9}
+.lb{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:40;padding:16px;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:92vh;border-radius:12px}
+</style>
+
+<!-- ======================= HEADER ======================= -->
+<header>
+  <a class="lg" href="#">milts.</a>
+  <a class="cta" href="#lab">Rancang panggung</a>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<div class="hero" id="hero">
+  <div class="sky"></div>
+  <div class="w">
+    <h1>Acara kamu,<br><span>panggung</span> kami.</h1>
+    <p>Dekorasi pengajian, wisuda, event, dan backdrop dari Jagakarsa, Jakarta Selatan. Dibuat sesuai ukuran dan budget.</p>
+    <a class="btn" href="#lab">Coba rancang 3D</a>
+    <a class="btn o" href="pesan.html">Langsung pesan</a>
+  </div>
+  <svg class="sc" id="sc" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+  <button class="tgl" id="tgl" type="button">☾ Malam</button>
+</div>
+<div class="mq"><div id="mq"></div></div>
+
+<!-- ======================= LAYANAN ======================= -->
+<section>
+  <div class="w rv">
+    <h2>Yang kami<br>kerjakan.</h2>
+    <div class="sv" id="sv">
+      <a href="#galeri" data-cat="Pengajian" style="--c:#ffc533"><b>Pengajian</b><span>Majelis taklim, Maulid, Tahun Baru Islam</span></a>
+      <a href="#galeri" data-cat="Wisuda" style="--c:#ff5b3a"><b>Wisuda</b><span>Sekolah, pesantren, kampus</span></a>
+      <a href="#galeri" data-cat="Event" style="--c:#9fb4ff"><b>Event</b><span>Festival, semarak, art show</span></a>
+      <a href="#galeri" data-cat="Backdrop" style="--c:#ffc533"><b>Backdrop</b><span>Studio foto, mal, acara brand</span></a>
+      <a href="#galeri" data-cat="Properti" style="--c:#ff5b3a"><b>Properti</b><span>Dibuat custom sesuai ide kamu</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= STUDIO 3D ======================= -->
+<section id="lab">
+  <div class="w">
+    <div class="lab rv">
+      <h2>Studio panggung 3D</h2>
+      <p class="mut">Atur ukuran, warna, dan isi panggung. Geser layarnya untuk memutar.</p>
+      <div class="ui">
+        <div class="ctl">
+          <div class="tg" id="ev"></div>
+          <label for="inW">Lebar <b id="lw"></b></label>
+          <input type="range" id="inW" min="2" max="50" step=".5" value="6">
+          <label for="inH">Tinggi <b id="lh"></b></label>
+          <input type="range" id="inH" min="1.5" max="50" step=".5" value="3">
+          <label>Warna</label>
+          <div class="sw" id="sw"></div>
+          <label for="inT">Tulisan di backdrop</label>
+          <input type="text" id="inT" value="Haflah 2026" maxlength="22">
+          <div class="tg" id="op"></div>
         </div>
-    </section>
-
-    <section id="about" class="section">
-        <div class="container">
-            <h2>Tentang Kami</h2>
-            <p>Milts Decoration adalah mitra terpercaya anda dalam ​menciptakan dekorasi acara ​yang memukau, berkesan ​dan elegan, Dengan pengelaman bertahun tahun, kami ​​telah menggarap berbagai jenis acara, mulai dari ​acara islami yang khusyuk ​sampai acara pentas yang ​meriah. Kami memahami bahwa setiap acara memiliki ​​keunikannya tersendiri. Oleh karena itu, kami ​berkomitmen untuk menciptakan ​acara yang kalian ​idamkan dan inginkan serta berkomitmen untuk ​memberikan ​solusi dekorasi yang disesuaikan dengan ​tema, konsep dan budget anda ​tersendiri. Tim kami ​yang kreatif dan professional akan bekerja sama ​dengan anda ​untuk mewujudkan visi acara yang ​sempurna.</p>
+        <div style="min-width:0">
+          <div class="vw" id="vw">
+            <div class="wd" id="wd"><div id="fl"></div><div id="kp"></div><div id="bk"></div><div id="pp"></div></div>
+            <span class="hint">← geser untuk memutar →</span>
+          </div>
+          <div class="sm" id="sm"></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="services" class="section">
-        <div class="container">
-            <h2>Layanan Kami</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-mosque"></i>
-                    <h3>Pengajian</h3>
-                    <p>Kreasi dekorasi islami untuk acara pengajian dan majelis taklim</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Wisuda</h3>
-                    <p>Dekorasi elegan untuk acara wisuda sekolah dan universitas</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-hammer"></i>
-                    <h3>Property</h3>
-                    <p>Membuat property sesuai keiinginan kamu untuk memeriahkan acara</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Event</h3>
-                    <p>Dekorasi khusus untuk berbagai jenis event dan acara</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-image"></i>
-                    <h3>Background</h3>
-                    <p>Dekorasi backdrop profesional untuk studio foto dan event</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ======================= GALERI ======================= -->
+<section id="galeri">
+  <div class="w rv">
+    <h2>Galeri gaya.</h2>
+    <div class="chips" id="ch"></div>
+    <p class="gnote" id="gnote" hidden></p>
+    <div class="cg" id="cg"></div>
+  </div>
+</section>
 
-    <section id="gallery" class="section">
-        <div class="container">
-            <h2>Gallery Kami</h2>
-    <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr1.webp');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Wisuda</h3>
-                                <p>Dekorasi Acara Haflatul Wada' (Wisuda Santri Akhir) di Pondok Pesantren Daarul Rahman Jagakarsa</p>   
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr2.webp');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Maulid</h3>
-                                <p>Dekorasi Maulid Nabi di Pondok Pesantren Daarul Rahman Bogor</p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr3.webp');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Festival</h3>
-                                <p>Dekorasi Art Festival (Festival Kesenian) di Pondok Pesantren Daarul Rahman Bogor</p>
-                              
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr4.webp');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Islami</h3>
-                                <p>Dekorasi Memperingati Tahun Baru Islam di Pondok Pesantren Qonita Islamic School Tangerang </p>
-                               
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tambahkan product card baru di sini -->
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr5.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Festival</h3>
-                                <p>Dekorasi Acara Semarak/Festival di Pondok Pesantren Modern Sahid Bogor</p>
-                               
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr6.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Studio</h3>
-                                <p>Dekorasi Background Photo Studio di Ninne Studio Lenteng Agung</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr7.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Festival</h3>
-                                <p>Dekorasi Acara Islamic Culture di Kampus UNJ</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr8.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Acara</h3>
-                                <p>Dekorasi Acara Salah Satu Angkatan di Kampus UNJ</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr9.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Backdrop</h3>
-                                <p>Dekorasi Backdrop Untuk Menghiasi Acara di Lotte Mart Mall Kuningan City</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr10.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Property</h3>
-                                <p>Dekorasi Property Untuk Memeriahkan Acara</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr11.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Maulid</h3>
-                                <p>Dekorasi Maulid Nabi di Kampus UNJ</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('images/pr12.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Dekorasi Property</h3>
-                                <p>Dekorasi Property Oleh Brand Hammer Untuk Acara di Mall Sarinah Senayan</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
+<!-- ======================= REVIEW (muncul kalau sudah ada) ======================= -->
+<section id="rws" hidden>
+  <div class="w rv">
+    <h2>Kata mereka.</h2>
+    <div class="rw" id="rvl"></div>
+  </div>
+</section>
 
-    <section class="aksi">
-        <div class="container">
-            <h2>Setiap momen acara yang anda inginkan pantas dirayakan dengan dekorasi yang memukau dan tak ​terlupakan. Di Milts Decoration, kami tidak hanya menghiasi Acara anda, tapi juga menghadirkan ​keindahan yang menyentuh hati dan meninggalkan kesan mendalam di setiap sudut acara Anda. ​Dengan dedikasi pada detail, kreativitas tanpa batas, dan komitmen pada kepuasan pelanggan, kami ​siap menjadi mitra terbaik untuk mewujudkan acara impian Anda.</h2>
-            <p><b> Jadi tunggu apa lagi?<br>Hubungi kami sekarang juga!</b></p>
-            
-        </div>
-    </section>
+<!-- ======================= CARA PESAN ======================= -->
+<section>
+  <div class="w rv">
+    <h2>Cara pesan.</h2>
+    <div class="fl">
+      <div><i>1</i><b>Cerita</b><p>Isi form acara dan ukuran.</p></div>
+      <div><i>2</i><b>Survei</b><p>Kami cek lokasi dan ukur.</p></div>
+      <div><i>3</i><b>Produksi</b><p>DP, lalu kami kerjakan.</p></div>
+      <div><i>4</i><b>Pasang</b><p>Siap sebelum acara mulai.</p></div>
+    </div>
+    <p style="margin-top:26px">
+      <a class="btn" href="pesan.html">Pesan sekarang</a>
+      <a class="btn o" href="pesan.html#lacak">Lacak pesanan</a>
+    </p>
+  </div>
+</section>
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Hubungi Kami</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> +62 857-7663-3007</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Jakagarsa, Jakarta Selatan</p>
-                </div>
-                <div class="social-buttons">
-                    <a href="https://wa.me/6285776633007" class="social-button whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://www.instagram.com/miltsdecoration/" class="social-button instagram">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                    <a href="https://www.tiktok.com/@milts3" class="social-button tiktok">
-                        <i class="fab fa-tiktok"></i> TikTok
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ======================= FOOTER ======================= -->
+<footer class="ft">
+  <div class="w">
+    <div class="r"><span>Siap bikin acara kamu beda?</span><a href="https://wa.me/6285776633007">WhatsApp +62 857-7663-3007</a></div>
+    <h2>milts.</h2>
+    <div class="r">
+      <span>© 2025 Milts Decoration · Jagakarsa, Jakarta Selatan</span>
+      <span><a href="https://www.instagram.com/miltsdecoration/">Instagram</a> · <a href="https://www.tiktok.com/@milts3">TikTok</a></span>
+    </div>
+  </div>
+</footer>
 
-    <footer>
-        <p>&copy; 2025 Milts Decoration. All Rights Reserved.</p>
-    </footer>
+<!-- ======================= KELOLA GALERI (hanya pemilik) ======================= -->
+<button class="own" id="own" type="button" hidden>+ Foto galeri</button>
+<div class="up" id="up" hidden>
+  <div class="hd"><b>Tambah foto proyek</b><button type="button" id="upx" aria-label="Tutup">✕</button></div>
+  <input type="file" id="uf" accept="image/*" multiple>
+  <input id="ut" placeholder="Judul atau nama klien (opsional)">
+  <select id="uc"></select>
+  <button class="go" id="ub" type="button">Unggah foto</button>
+  <div class="msg" id="um" role="status"></div>
+  <button class="go" id="lo" type="button" style="background:none;color:#fff;border:1px solid #fff5">Keluar</button>
+</div>
+<div class="up" id="lp" hidden>
+  <div class="hd"><b>Masuk pemilik</b><button type="button" id="lpx" aria-label="Tutup">✕</button></div>
+  <input id="le" type="email" placeholder="Email" autocomplete="username">
+  <input id="lpw" type="password" placeholder="Password" autocomplete="current-password">
+  <button class="go" id="lb2" type="button">Masuk</button>
+  <div class="msg" id="lm" role="status"></div>
+</div>
 
-    <script src="js/script.js"></script>
-</body>
-</html>
+<!-- ======================= LIGHTBOX ======================= -->
+<div class="lb" id="lb"><img id="li" alt=""></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+/* ==========================================================================
+   DAFTAR ISI JS
+   A. Data tetap        D. Studio panggung 3D     G. Kelola galeri (pemilik)
+   B. Marquee & reveal  E. Adegan hero siang/malam H. Review
+   C. Lightbox          F. Galeri
+   ========================================================================== */
+
+/* A. DATA TETAP ----------------------------------------------------------- */
+const CATS = ["Pengajian", "Wisuda", "Event", "Backdrop", "Properti"];
+const WA = "https://wa.me/6285776633007";
+// [kategori, nama warna, gradient atas, gradient bawah]
+const PALETTE = [["#1f7a5a","#0d3b2c"],["#3a5bff","#101a3a"],["#ff5b3a","#8f1d0e"],["#9b4dff","#2b0f5c"],["#101a3a","#3a5bff"]];
+const COLOR_NAMES = ["hijau","biru","coral","ungu","navy"];
+
+/* B. MARQUEE & REVEAL ----------------------------------------------------- */
+$("mq").textContent = Array(10).fill("PENGAJIAN ✦ WISUDA ✦ EVENT ✦ BACKDROP ✦ PROPERTI ✦").join(" ");
+const revealObs = new IntersectionObserver(
+  list => list.forEach(x => x.isIntersecting && x.target.classList.add("in")),
+  {threshold: .08}
+);
+document.querySelectorAll(".rv").forEach(e => revealObs.observe(e));
+
+/* C. LIGHTBOX ------------------------------------------------------------- */
+function openLightbox(src, alt){ $("li").src = src; $("li").alt = alt || ""; $("lb").classList.add("on"); }
+function closeLightbox(){ $("lb").classList.remove("on"); }
+$("lb").onclick = closeLightbox;
+addEventListener("keydown", e => e.key === "Escape" && closeLightbox());
+
+/* D. STUDIO PANGGUNG 3D --------------------------------------------------- */
+const PRESETS = {
+  Pengajian: {c:0, t:"Majelis Taklim", o:["Lengkung","Bunga","Lampu"]},
+  Wisuda:    {c:1, t:"Wisuda 2026",    o:["Karpet","Lampu","Bunga"]},
+  Event:     {c:2, t:"Semarak 2026",   o:["Karpet","Lampu"]},
+  Backdrop:  {c:3, t:"Photo Spot",     o:["Lengkung","Lampu"]}
+};
+const stage = {ev:"Pengajian", ci:0, on:new Set(["Lengkung","Bunga"]), a:-22};
+const evBox = $("ev"), opBox = $("op"), swBox = $("sw");
+
+Object.keys(PRESETS).forEach(k => {
+  const b = document.createElement("button");
+  b.type = "button"; b.textContent = k;
+  b.onclick = () => { stage.ev = k; stage.ci = PRESETS[k].c; stage.on = new Set(PRESETS[k].o); $("inT").value = PRESETS[k].t; drawStage(); };
+  evBox.appendChild(b);
+});
+["Lengkung","Karpet","Bunga","Lampu"].forEach(k => {
+  const b = document.createElement("button");
+  b.type = "button"; b.textContent = k; b.dataset.k = k;
+  b.onclick = () => { stage.on.has(k) ? stage.on.delete(k) : stage.on.add(k); drawStage(); };
+  opBox.appendChild(b);
+});
+PALETTE.forEach((c, i) => {
+  const d = document.createElement("i");
+  d.style.background = c[0];
+  d.onclick = () => { stage.ci = i; drawStage(); };
+  swBox.appendChild(d);
+});
+
+function drawStage(){
+  const w = +$("inW").value, h = +$("inH").value, [c1, c2] = PALETTE[stage.ci];
+  const S = (el, css) => Object.assign(el.style, css);
+  $("lw").textContent = w + " m";
+  $("lh").textContent = h + " m";
+  [...evBox.children].forEach(b => b.classList.toggle("on", b.textContent == stage.ev));
+  [...opBox.children].forEach(b => b.classList.toggle("on", stage.on.has(b.dataset.k)));
+  [...swBox.children].forEach((d, i) => d.classList.toggle("on", i == stage.ci));
+
+  const K = Math.min(44, 430 / Math.max(w * .95, h * 1.5, 8));   // px per meter
+  const D = 6 * K;                                               // kedalaman lantai
+  $("wd").style.transform = `translateZ(-200px) rotateX(-14deg) rotateY(${stage.a}deg)`;
+
+  S($("fl"), {width:(w+3)*K+"px", height:D+"px", left:-(w+3)*K/2+"px", top:-D/2+"px", transform:"rotateX(90deg)"});
+  S($("kp"), {
+    display: stage.on.has("Karpet") ? "block" : "none",
+    width:1.4*K+"px", height:D*.9+"px", left:-.7*K+"px", top:-D*.45-1+"px",
+    transform:"rotateX(90deg) translateZ(1px)",
+    background:"repeating-linear-gradient(#b3202f 0 14px,#d8333f 14px 28px)"
+  });
+
+  const lampu = stage.on.has("Lampu") ? "radial-gradient(ellipse at 50% 0,#fff9 0,#0000 60%)," : "";
+  const bunga = stage.on.has("Bunga")
+    ? "radial-gradient(circle at 12% 95%,#ffc533 0 7%,#0000 7.5%),radial-gradient(circle at 24% 100%,#ff5b3a 0 9%,#0000 9.5%),radial-gradient(circle at 88% 95%,#ffc533 0 7%,#0000 7.5%),radial-gradient(circle at 76% 100%,#ff5b3a 0 9%,#0000 9.5%),"
+    : "";
+  const bk = $("bk");
+  S(bk, {
+    width:w*K+"px", height:h*K+"px", left:-w*K/2+"px", top:-h*K+"px",
+    transform:`translateZ(${-D/2}px)`,
+    background:`${lampu}${bunga}linear-gradient(160deg,${c1},${c2})`,
+    borderRadius: stage.on.has("Lengkung") ? `${w*K/2}px ${w*K/2}px 0 0` : "6px 6px 0 0",
+    fontSize: Math.max(14, Math.min(w*K/8, h*K/4)) + "px"
+  });
+  bk.textContent = $("inT").value;
+
+  S($("pp"), {height:1.7*K+"px", left:-13+1.2*K+"px", top:-1.7*K+"px", transform:`translateZ(${-D/4}px) rotateY(${-stage.a}deg)`});
+
+  $("sm").innerHTML = `${w} × ${h} m · ${(w*h).toFixed(1)} m²<br><a id="wa" target="_blank" rel="noopener">Kirim konsep ini ke Milts</a>`;
+  $("wa").href = WA + "?text=" + encodeURIComponent(
+    `Halo Milts, saya mau konsultasi dekorasi ${stage.ev}. Ukuran ${w} x ${h} m, warna ${COLOR_NAMES[stage.ci]}, tulisan "${$("inT").value}", opsi: ${[...stage.on].join(", ") || "-"}.`
+  );
+}
+["inW","inH","inT"].forEach(i => $(i).oninput = drawStage);
+
+// geser untuk memutar
+(function(){
+  const vw = $("vw"); let down = false, x0 = 0, a0 = 0;
+  vw.onpointerdown = e => { down = true; x0 = e.clientX; a0 = stage.a; vw.setPointerCapture(e.pointerId); };
+  vw.onpointermove = e => { if(down){ stage.a = Math.max(-60, Math.min(60, a0 + (e.clientX - x0) * .4)); drawStage(); } };
+  vw.onpointerup = () => down = false;
+})();
+drawStage();
+
+/* E. ADEGAN HERO SIANG/MALAM ---------------------------------------------- */
+(function(){
+  const cloud = (x, y, k) => `<path d="M0 40q8-30 38-18q10-30 44-6q34-4 28 24z" transform="translate(${x} ${y}) scale(${k})"/>`;
+  const wins = (x, y, c, r, dx, dy) => {
+    let s = "";
+    for(let j = 0; j < r; j++) for(let i = 0; i < c; i++) s += `<rect class="win" x="${x+i*dx}" y="${y+j*dy}" width="38" height="34" rx="3"/>`;
+    return s;
+  };
+
+  // bintang
+  let stars = "";
+  for(let i = 0; i < 45; i++) stars += `<circle class="tw" cx="${(i*179)%1600}" cy="${(i*61)%250+14}" r="${1+i%3*.6}" style="animation-delay:${(i%7)*.45}s"/>`;
+
+  // lapisan jauh: gedung + masjid
+  let far = "";
+  [[20,380],[110,345],[200,392],[290,360],[1560,370]].forEach(a => far += `<rect class="f2" x="${a[0]}" y="${a[1]}" width="${a[0]==1560?60:78}" height="${470-a[1]}"/>`);
+  far += `<g><path class="f2" d="M1360 330a60 60 0 0 1 120 0z"/><rect class="f2" x="1350" y="330" width="140" height="140"/><rect class="f2" x="1322" y="262" width="18" height="208"/><path class="f2" d="M1322 262l9-28 9 28z"/><rect class="f2" x="1500" y="262" width="18" height="208"/><path class="f2" d="M1500 262l9-28 9 28z"/><path d="M1420 270v-26"/></g>`;
+
+  // lapisan tengah: ruko, tenda, sorot lampu, panggung lengkung
+  let mid = `<rect class="f" x="110" y="310" width="300" height="160"/><path d="M96 310H424"/>${wins(138,336,4,2,68,62)}<rect class="f" x="1040" y="320" width="270" height="150"/><path d="M1026 320H1324"/>${wins(1066,346,3,2,82,62)}`;
+  mid += `<path d="M430 405L515 340L600 405z" style="fill:#ff5b3a"/><path d="M455 405l60-65l-30 65M545 405l-30-65l60 65" style="stroke:#fff6"/><path d="M440 405v65M590 405v65"/><rect class="f" x="455" y="440" width="120" height="30"/>`;
+  mid += `<polygon class="bm" points="700,0 640,450 790,450" style="transform-origin:700px 0"/><polygon class="bm" points="900,0 810,450 960,450" style="transform-origin:900px 0;animation-direction:alternate-reverse"/>`;
+  mid += `<rect class="f" x="620" y="440" width="360" height="30"/><path class="a" d="M660 440V300a140 140 0 0 1 280 0V440z"/><path d="M682 440V300a118 118 0 0 1 236 0V440"/><text class="tx" x="800" y="335" text-anchor="middle">HAFLAH</text><rect class="f" x="630" y="370" width="16" height="70"/><rect class="f" x="954" y="370" width="16" height="70"/>`;
+  for(let i = 0; i < 7; i++) mid += `<circle cx="${690+i*36}" cy="432" r="8" style="fill:${["#ffc533","#ff5b3a","#fff"][i%3]}"/>`;
+
+  // lapisan depan: jalan, tiang bendera, lampu hias, lampion, orang berjalan
+  let near = `<rect x="-100" y="470" width="1800" height="200" style="fill:var(--gr)"/><path d="M0 515H1600" stroke-dasharray="40 30"/>`;
+  for(let i = 0; i < 8; i++){
+    const x = 60 + i*205;
+    near += `<path d="M${x} 250V470"/><path class="fg" d="M${x} 250l50 15l-50 15z" style="fill:${["#ff5b3a","#ffc533","#3a5bff"][i%3]};transform-origin:${x}px 250px"/>`;
+  }
+  const pts = [];
+  for(let x = 0; x <= 1600; x += 50) pts.push([x, 140 + 32*Math.sin(x/110)]);
+  near += `<path d="M${pts.map(p => p.join(" ")).join("L")}"/>`;
+  pts.forEach((p, i) => {
+    near += `<circle class="bl" cx="${p[0]}" cy="${p[1]+5}" r="4" style="animation-delay:${(i%6)*.4}s"/>`;
+    if(i % 4 == 2) near += `<g class="sw1" style="transform-origin:${p[0]}px ${p[1]}px"><path d="M${p[0]} ${p[1]}v26"/><ellipse cx="${p[0]}" cy="${p[1]+44}" rx="13" ry="18" style="fill:#ff5b3a"/></g>`;
+  });
+  const fig = `<g><g class="bob"><circle cx="0" cy="-46" r="6"/><path d="M0-40V-16M0-34L-8-20M0-34L8-22M0-16L-6 0M0-16L6 0"/></g></g>`;
+  for(let i = 0; i < 6; i++) near += `<g class="${i%2 ? "pp2" : "pp1"}" style="animation-delay:-${i*8}s;animation-duration:${34+i*6}s"><g transform="translate(0 ${478+(i%3)*14})">${fig}</g></g>`;
+
+  $("sc").innerHTML =
+    `<g class="nt"><g class="ly" data-d="3">${stars}</g></g>` +
+    `<g class="dy"><circle cx="1230" cy="120" r="44"/><circle cx="1230" cy="120" r="58" stroke-dasharray="4 8"/></g>` +
+    `<g class="nt"><path class="mn" d="M1230 78a44 44 0 1 0 0 86a36 36 0 1 1 0-86z"/></g>` +
+    `<g class="ly" data-d="6" style="opacity:.6"><g class="cl"><g>${cloud(0,70,1.2)}${cloud(500,130,.9)}${cloud(900,50,1)}</g></g></g>` +
+    `<g class="ly" data-d="9">${far}</g><g class="ly" data-d="18">${mid}</g><g class="ly" data-d="30">${near}</g>`;
+
+  // siang/malam: otomatis jadi malam setelah 2,6 detik, bisa diganti manual
+  const hero = $("hero"), btn = $("tgl");
+  const setNight = n => { hero.classList.toggle("n", n); btn.textContent = n ? "☀ Siang" : "☾ Malam"; };
+  const auto = setTimeout(() => setNight(true), 2600);
+  btn.onclick = () => { clearTimeout(auto); setNight(!hero.classList.contains("n")); };
+
+  // parallax mengikuti kursor
+  addEventListener("pointermove", e => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    document.querySelectorAll(".ly").forEach(l => {
+      const d = +l.dataset.d;
+      l.style.transform = `translate(${-x*d}px,${-y*d*.4}px)`;
+    });
+  });
+})();
+
+/* F. GALERI --------------------------------------------------------------- */
+// Contoh gaya (SVG). Hanya tampil selama belum ada foto asli yang diunggah.
+// [kategori, judul, indeks warna]
+const SAMPLES = [
+  ["Pengajian","Lengkung Hijau",0], ["Wisuda","Panggung Biru",1], ["Event","Semarak Coral",2], ["Backdrop","Photo Spot Ungu",3],
+  ["Pengajian","Maulid Krem",0], ["Event","Festival Navy",4], ["Wisuda","Huruf Timbul",1], ["Backdrop","Latar Studio",4],
+  ["Properti","Dekor Custom",2]
+];
+const SAMPLE_BG = ["#ffc533","#9fb4ff","#ff9d85","#d5b8ff","#c9e8d6"];
+
+let galleryCat = "Semua";
+let photos = [];          // dari database: {_id, id (aset), title, cat, at}
+let ownerMode = false;    // true kalau yang membuka adalah pemilik
+let sureId = null;        // foto yang sedang menunggu konfirmasi hapus
+
+function sampleSvg(ci, name){
+  const [a, b] = PALETTE[ci];
+  const shapes = [
+    `<path d="M30 190V90a70 70 0 0 1 140 0v100z" fill="${a}"/><circle cx="55" cy="185" r="10" fill="#ffc533"/><circle cx="150" cy="182" r="12" fill="#ff5b3a"/>`,
+    `<rect x="20" y="50" width="160" height="110" rx="6" fill="${a}"/><rect x="10" y="160" width="180" height="30" fill="${b}"/><text x="100" y="112" font-size="20" font-weight="800" fill="#fff" text-anchor="middle">${name.split(" ")[0]}</text>`,
+    `<circle cx="100" cy="95" r="70" fill="${a}"/><circle cx="100" cy="95" r="38" fill="#ffc533"/><rect x="20" y="170" width="160" height="12" fill="${b}"/>`,
+    `<rect x="40" y="30" width="120" height="150" rx="60" fill="${a}"/><rect x="85" y="140" width="30" height="50" fill="${b}"/>`,
+    `<path d="M20 190L60 50h80l40 140z" fill="${a}"/><path d="M60 50h80l-10 40H70z" fill="${b}"/>`
+  ];
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${shapes[name.length % 5]}</svg>`;
+}
+
+function renderChips(){
+  const hasPhotos = photos.length > 0;
+  const source = hasPhotos ? photos.map(p => p.cat) : SAMPLES.map(s => s[0]);
+  const have = new Set(source);
+  const ordered = [...CATS.filter(c => have.has(c)), ...[...have].filter(c => !CATS.includes(c))];
+  if(galleryCat !== "Semua" && !ordered.includes(galleryCat)) ordered.push(galleryCat);
+  const box = $("ch"); box.innerHTML = "";
+  ["Semua", ...ordered].forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = c; b.className = c == galleryCat ? "on" : "";
+    b.onclick = () => { galleryCat = c; renderGallery(); };
+    box.appendChild(b);
+  });
+}
+
+function photoCard(p){
+  const fig = document.createElement("figure");
+  fig.className = "cd ph";
+  const src = p.url;
+
+  const open = document.createElement("button");
+  open.type = "button"; open.className = "open"; open.setAttribute("aria-label", "Lihat foto " + p.title);
+  const img = document.createElement("img");
+  img.src = src; img.alt = p.title; img.loading = "lazy";
+  img.onerror = () => { fig.style.background = "#2a2f4a"; img.remove(); };
+  open.appendChild(img);
+  open.onclick = () => openLightbox(src, p.title);
+
+  const cap = document.createElement("div"); cap.className = "cap";
+  const t = document.createElement("b"); t.textContent = p.title;
+  const c = document.createElement("small"); c.textContent = p.cat;
+  cap.append(t, c);
+  fig.append(open, cap);
+
+  if(ownerMode){
+    const del = document.createElement("button");
+    del.type = "button"; del.className = "del";
+    const sure = sureId === p._id;
+    del.textContent = sure ? "Yakin hapus?" : "Hapus";
+    del.classList.toggle("sure", sure);
+    del.onclick = () => sure ? removePhoto(p) : (sureId = p._id, renderGallery(), setTimeout(() => { if(sureId === p._id){ sureId = null; renderGallery(); } }, 4000));
+    fig.appendChild(del);
+  }
+  return fig;
+}
+
+function sampleCard(s){
+  const d = document.createElement("div");
+  d.className = "cd";
+  d.style.background = SAMPLE_BG[s[2]];
+  d.innerHTML = sampleSvg(s[2], s[1]) + `<div><b></b><br><small></small></div>`;
+  d.querySelector("b").textContent = s[1];
+  d.querySelector("small").textContent = s[0];
+  d.onmousemove = e => {
+    const r = d.getBoundingClientRect();
+    d.style.transform = `perspective(600px) rotateY(${(e.clientX-r.left)/r.width*16-8}deg) rotateX(${-((e.clientY-r.top)/r.height*16-8)}deg) scale(1.03)`;
+  };
+  d.onmouseleave = () => d.style.transform = "";
+  return d;
+}
+
+function renderGallery(){
+  renderChips();
+  const grid = $("cg"), note = $("gnote");
+  grid.innerHTML = "";
+  const pick = c => galleryCat == "Semua" || c == galleryCat;
+
+  if(photos.length){
+    const list = photos.filter(p => pick(p.cat));
+    list.forEach(p => grid.appendChild(photoCard(p)));
+    note.hidden = list.length > 0;
+    note.textContent = "Belum ada foto untuk kategori ini.";
+  }else{
+    SAMPLES.filter(s => pick(s[0])).forEach(s => grid.appendChild(sampleCard(s)));
+    note.hidden = false;
+    note.textContent = ownerMode
+      ? "Ini hanya contoh gaya. Tekan tombol “+ Foto galeri” untuk memasang foto hasil dekorasi kamu."
+      : "Contoh gaya. Foto hasil dekorasi kami segera tampil di sini.";
+  }
+}
+
+// klik layanan -> buka galeri di kategori itu
+$("sv").addEventListener("click", e => {
+  const a = e.target.closest("a[data-cat]");
+  if(a){ galleryCat = a.dataset.cat; renderGallery(); }
+});
+renderGallery();
+
+/* G. KELOLA GALERI (database + upload, khusus pemilik) -------------------- */
+
+CATS.forEach(c => { const o = document.createElement("option"); o.textContent = c; $("uc").appendChild(o); });
+
+// kecilkan foto HP (maks 1800px, JPEG) supaya cepat diunggah dan dimuat.
+// File SVG diubah dulu jadi PNG (server upload tidak menerima SVG).
+async function svgToPng(file, max){
+  const url = URL.createObjectURL(file);
+  try{
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    const w = img.naturalWidth || 1200, h = img.naturalHeight || 1200;
+    const k = max / Math.max(w, h);
+    const c = document.createElement("canvas");
+    c.width = Math.round(w * k); c.height = Math.round(h * k);
+    c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+    return await new Promise(r => c.toBlob(r, "image/png"));
+  }finally{ URL.revokeObjectURL(url); }
+}
+
+async function shrink(file, max = 1800){
+  if(file.type === "image/gif") return file;
+  if(file.type === "image/svg+xml" || /\.svg$/i.test(file.name || "")){
+    return (await svgToPng(file, max)) || file;
+  }
+  try{
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas");
+    c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    const blob = await new Promise(r => c.toBlob(r, "image/jpeg", .86));
+    return blob || file;
+  }catch(e){ return file; }
+}
+
+/* Penyimpanan: daftar foto di Supabase (tabel "gallery"), file foto di Cloudinary.
+   Login pemilik lewat Supabase Auth. Buka situs dengan akhiran #kelola untuk masuk. */
+const SB_URL = "https://eqwiumfcbqiynozvxqtx.supabase.co";
+const SB_KEY = "sb_publishable_NAgcpDhw-02-RT2Yb9duMg_z7ZO0Iiv";
+const CLOUD = "dcx2v6zfm", PRESET = "milts_preset";
+let sb = null;
+
+async function uploadToCloudinary(blob){
+  const fd = new FormData();
+  fd.append("file", blob);
+  fd.append("upload_preset", PRESET);
+  const r = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/image/upload`, {method: "POST", body: fd});
+  if(!r.ok){
+    let why = ""; try{ why = (await r.json()).error.message; }catch(_){}
+    throw new Error("Cloudinary: " + (why || r.status));
+  }
+  return (await r.json()).secure_url;
+}
+
+async function loadPhotos(){
+  if(!sb) return;
+  const {data, error} = await sb.from("gallery").select("id,url,title,cat,created_at").order("created_at", {ascending: false});
+  if(error){ console.warn("[galeri] gagal memuat foto:", error.message); return; }
+  photos = (data || []).filter(p => p.url).map(p => ({...p, _id: p.id}));
+  renderGallery();
+}
+
+async function uploadSelected(){
+  const files = [...$("uf").files];
+  const msg = $("um"), btn = $("ub");
+  if(!files.length){ msg.textContent = "Pilih foto dulu."; return; }
+  btn.disabled = true;
+  let ok = 0; const fails = [];
+  for(let n = 0; n < files.length; n++){
+    msg.textContent = `Mengunggah ${n+1} dari ${files.length}…`;
+    try{
+      const blob = await shrink(files[n]);
+      const url = await uploadToCloudinary(blob);
+      const {error} = await sb.from("gallery").insert({
+        url,
+        title: $("ut").value.trim() || "Proyek Milts",
+        cat: $("uc").value
+      });
+      if(error) throw new Error("Database: " + error.message);
+      ok++;
+    }catch(e){
+      console.warn("[galeri] upload gagal:", e);
+      fails.push(`${files[n].name}: ${e.message || "gagal diunggah"}`);
+    }
+  }
+  btn.disabled = false;
+  msg.textContent = `${ok} foto terunggah.` + (fails.length ? " Gagal: " + fails.join("; ") : "");
+  if(ok){ $("uf").value = ""; $("ut").value = ""; loadPhotos(); }
+}
+
+async function removePhoto(p){
+  sureId = null;
+  const {error} = await sb.from("gallery").delete().eq("id", p._id);
+  if(error){ $("um").textContent = "Foto gagal dihapus: " + error.message; $("up").hidden = false; $("own").hidden = true; return; }
+  loadPhotos();
+}
+
+// panel pemilik: tombol "+ Foto galeri", panel unggah, dan form login
+function setOwner(on){
+  ownerMode = on;
+  $("own").hidden = !on || !$("up").hidden;
+  if(!on) $("up").hidden = true;
+  renderGallery();
+}
+
+(async () => {
+  try{
+    const {createClient} = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm");
+    sb = createClient(SB_URL, SB_KEY);
+  }catch(e){ console.warn("[galeri] supabase-js gagal dimuat:", e); return; }
+
+  $("own").onclick = () => { $("up").hidden = false; $("own").hidden = true; };
+  $("upx").onclick = () => { $("up").hidden = true; $("own").hidden = false; };
+  $("ub").onclick = uploadSelected;
+  $("lpx").onclick = () => { $("lp").hidden = true; };
+  $("lo").onclick = async () => { await sb.auth.signOut(); setOwner(false); };
+  $("lb2").onclick = async () => {
+    const m = $("lm"); m.textContent = "Masuk…";
+    const {error} = await sb.auth.signInWithPassword({email: $("le").value.trim(), password: $("lpw").value});
+    if(error){ m.textContent = "Gagal masuk: " + error.message; return; }
+    $("lpw").value = ""; m.textContent = "";
+    $("lp").hidden = true; setOwner(true);
+    $("up").hidden = false; $("own").hidden = true;
+  };
+
+  const {data} = await sb.auth.getSession();
+  setOwner(!!(data && data.session));
+  await loadPhotos();
+
+  if(location.hash == "#kelola"){
+    if(ownerMode){ $("up").hidden = false; $("own").hidden = true; }
+    else $("lp").hidden = false;
+  }
+})();
+
+/* H. REVIEW --------------------------------------------------------------- */
+(async () => {
+  try{
+    const r = await fetch("https://eqwiumfcbqiynozvxqtx.supabase.co/rest/v1/rpc/public_reviews", {
+      method: "POST",
+      headers: {apikey: "sb_publishable_NAgcpDhw-02-RT2Yb9duMg_z7ZO0Iiv", "Content-Type": "application/json"},
+      body: "{}"
+    });
+    const list = await r.json();
+    if(!r.ok || !Array.isArray(list)){ console.warn("[ulasan] public_reviews gagal:", r.status, list); return; }
+    if(!list.length){ console.info("[ulasan] belum ada ulasan yang lolos dari public_reviews"); return; }
+    const box = $("rvl");
+    list.forEach(x => {
+      const f = document.createElement("figure"), s = document.createElement("div"), q = document.createElement("blockquote"), c = document.createElement("figcaption");
+      f.className = "rc"; s.className = "st";
+      s.textContent = "★".repeat(x.rating) + "☆".repeat(5 - x.rating);
+      q.textContent = "“" + x.comment + "”";
+      c.textContent = "Kak " + x.first_name + (x.event_type ? " · " + x.event_type : "");
+      f.append(s, q, c); box.appendChild(f);
+    });
+    const sec = $("rws");
+    sec.hidden = false;
+    sec.querySelector(".rv").classList.add("in");
+  }catch(e){ console.warn("[ulasan] tidak bisa memuat ulasan:", e); }
+})();
+</script>
+
+</body></html>
